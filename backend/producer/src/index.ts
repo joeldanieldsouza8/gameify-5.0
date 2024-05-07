@@ -11,6 +11,11 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 import userRoutes from "./routes/users";
+import questionRoutes from "./routes/questions";
+import codeSnippetsRoutes from "./routes/codeSnippets";
+import examplesRoutes from "./routes/examples";
+import testCasesRoutes from "./routes/testCases";
+import topicRoutes from "./routes/topics";
 
 // Create an express app instance
 const app = express();
@@ -28,32 +33,12 @@ app.use(bodyParser.json()); // Middleware to parse JSON data
 
 const PORT = process.env.PORT || 4000;
 
-app.use("/users", userRoutes); // Use the user routes from the routes folder in the app instance to handle requests to '/users' endpoint
-
-// type UserData = {
-//   clerkUserID: string;
-//   username: string;
-//   firstName: string;
-//   lastName: string;
-//   badge: string;
-//   xpPoints: number;
-// };
-
-// entries: {
-//   [field: string]: unknown;
-// }
-
-// app.post("/getAllUsers", async (req, res) => {
-//   const data = req.body;
-//   console.log("Data received from frontend:", data); // debug
-
-//   try {
-//     // Add the users data to the Redis cache using sorted set
-//   } catch (error) {
-//     console.error("Error fetching data from Redis:", error);
-//     res.status(500).send("Internal server error");
-//   }
-// });
+app.use("/users", userRoutes);
+app.use("/questions", questionRoutes);
+app.use("/code-snippets", codeSnippetsRoutes);
+app.use("/examples", examplesRoutes);
+app.use("/test-cases", testCasesRoutes);
+app.use("/topics", topicRoutes);
 
 app.listen(PORT, () => {
   console.log(`Producer service is running on port ${PORT}`);

@@ -1,0 +1,32 @@
+[
+  {
+    "snippets": {
+      "javascript": "\"/**\\n * @param {number[]} nums\\n * @param {number} target\\n * @return {number[]}\\n */\\nvar twoSum = function(nums, target) {\\n    \\n};\"",
+      "typescript": "\"function twoSum(nums: number[], target: number): number[] {\\n    \\n};\"",
+      "python3": "\"class Solution:\\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\\n        \\n\"",
+      "java": "class Solution { public int[] twoSum(int[] nums, int target) { } }"
+    },
+
+    "questionID": 1
+  },
+  {
+    "snippets": {
+      "java": "class Solution { public int maxArea(int[] height) { } }",
+      "python3": "\"class Solution: def maxArea(self, height: List[int]) -> int: \"",
+      "javascript": "\"/**\\n * @param {number[]} height\\n * @return {number}\\n */\\nvar maxArea = function(height) {\\n    \\n};\"",
+      "typescript": "\"function maxArea(height: number[]): number {\\n    \\n};\""
+    },
+
+    "questionID": 2
+  },
+  {
+    "snippets": {
+      "typescript": "\"function findMedianSortedArrays(nums1: number[], nums2: number[]): number {\\n    \\n};\"",
+      "python3": "\"class Solution: def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float: \"",
+      "java": "\"class Solution { public double findMedianSortedArrays(int[] nums1, int[] nums2) { } }\"",
+      "javascript": "\"/**\\n * @param {number[]} nums1\\n * @param {number[]} nums2\\n * @return {number}\\n */\\nvar findMedianSortedArrays = function(nums1, nums2) {\\n    \\n};\""
+    },
+
+    "questionID": 3
+  }
+]

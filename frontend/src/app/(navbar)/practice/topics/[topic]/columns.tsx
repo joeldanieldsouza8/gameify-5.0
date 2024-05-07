@@ -16,17 +16,23 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import Link from "next/link";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Question = {
-  id: string;
-  question_name: string;
-  topic_tag: string;
-  difficulty_tag: string;
-  slug: string;
-};
+// export type Question = {
+//   id: string;
+//   question_name: string;
+//   topic_tag: string;
+//   difficulty_tag: string;
+//   slug: string;
+// };
 
-export const columns: ColumnDef<Question>[] = [
+export type TopicQuestionType = {
+  id: string;
+  title: string;
+  topicTag: string;
+  difficulty: string;
+  slug: string;
+}
+
+export const columns: ColumnDef<TopicQuestionType>[] = [
   // New column for row selection
   {
     id: "select",
@@ -50,15 +56,16 @@ export const columns: ColumnDef<Question>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+  
   {
-    accessorKey: "question_name",
+    accessorKey: "title",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Question Name
+          Question
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -67,6 +74,7 @@ export const columns: ColumnDef<Question>[] = [
       console.log("Row", row); // debug
 
       const questionID = row.original.id;
+      // const questionID = "2b0f3505-a551-47a7-bffc-582cb158da04"; // debug
       const slug = row.original.slug;
 
     //   const link = `/practice/topics/${slug}/questions/${questionID}`;
@@ -74,34 +82,36 @@ export const columns: ColumnDef<Question>[] = [
 
       return (
         <Link href={link}>
-          {row.original.question_name}
+          {row.original.title}
         </Link>
       );
     },
   },
+
   {
-    accessorKey: "topic_tag",
+    accessorKey: "topicTag",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Topic Tag
+          Topic
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
+  
   {
-    accessorKey: "difficulty_tag",
+    accessorKey: "difficulty",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Difficulty Tag
+          Difficulty
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

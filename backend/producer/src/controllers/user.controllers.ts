@@ -5,7 +5,10 @@ import { Request, Response } from "express";
 
 import { userService } from "../services/user.services";
 
-import { UserType, NewUserType } from "../../drizzle/schema/models/user";
+import {
+  UserTableType,
+  NewUserTableType,
+} from "../../drizzle/schema/models/user.model";
 
 async function getUsers(req: Request, res: Response) {
   try {
@@ -58,7 +61,7 @@ async function getUserById(req: Request, res: Response) {
 // };
 
 async function createUser(req: Request, res: Response) {
-  const data: NewUserType = req.body;
+  const data: NewUserTableType = req.body;
 
   try {
     console.log("Creating new user"); // debug

@@ -1,0 +1,18 @@
+[
+  {
+    "clerkID": "1",
+    "username": "johnsmith123",
+    "email": "johnsmith@gmail.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "xpPoints": 10
+  },
+  {
+    "clerkID": "2",
+    "username": "susanjohnson123",
+    "email": "susanjohnsan@gmail.com",
+    "firstName": "Susan",
+    "lastName": "Johnson",
+    "xpPoints": 250
+  }
+]

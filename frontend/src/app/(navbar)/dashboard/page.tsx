@@ -15,11 +15,10 @@ import { redirect } from "next/navigation";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
-import { getUserById } from "@/lib/actions/user.actions";
-
 import { convertToTitleCase } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
+import { fetchUserById } from "@/actions/user.actions";
 
 const uesrSalesData = [
   {
@@ -52,6 +51,7 @@ const uesrSalesData = [
 export default async function DashboardPage() {
   // Get the userId from auth() -- if null, the user is not signed in
   const { userId } = auth();
+  console.log("userId", userId); // debug
 
   const validateUser = await currentUser();
   console.log("Current User", validateUser); // debug
@@ -62,9 +62,7 @@ export default async function DashboardPage() {
   }
   // console.log("userId", userId); // debug
 
-  // TODO: Get the user details from the database
-  const user = await getUserById(userId);
-  console.log("Fetched user details", user); // debug
+  const user = await fetchUserById(userId);
 
   return (
     <div className="flex flex-col gap-5 w-full ">

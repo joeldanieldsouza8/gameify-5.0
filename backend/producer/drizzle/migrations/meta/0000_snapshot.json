@@ -1,5 +1,5 @@
 {
-  "id": "f9d7ecde-1ce0-41fa-8978-a27345e406ac",
+  "id": "03d90df6-d869-48f1-8f51-5abc086a9ca4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -10,10 +10,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "username": {
           "name": "username",
@@ -74,10 +73,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "totalQuestionsAnswered": {
           "name": "totalQuestionsAnswered",
@@ -120,16 +118,115 @@
         }
       }
     },
+    "codeSnippet": {
+      "name": "codeSnippet",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "snippets": {
+          "name": "snippets",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "questionID": {
+          "name": "questionID",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "codeSnippet_questionID_question_id_fk": {
+          "name": "codeSnippet_questionID_question_id_fk",
+          "tableFrom": "codeSnippet",
+          "tableTo": "question",
+          "columnsFrom": [
+            "questionID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "codeSnippet_id_unique": {
+          "name": "codeSnippet_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      }
+    },
+    "constraints": {
+      "name": "constraints",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "bulletPoints": {
+          "name": "bulletPoints",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "questionID": {
+          "name": "questionID",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "constraints_questionID_question_id_fk": {
+          "name": "constraints_questionID_question_id_fk",
+          "tableFrom": "constraints",
+          "tableTo": "question",
+          "columnsFrom": [
+            "questionID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "constraints_id_unique": {
+          "name": "constraints_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      }
+    },
     "example": {
       "name": "example",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "input": {
           "name": "input",
@@ -147,11 +244,11 @@
           "name": "explanation",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "questionID": {
           "name": "questionID",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": false,
           "notNull": true
         }
@@ -189,10 +286,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "title": {
           "name": "title",
@@ -280,10 +376,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "body": {
           "name": "body",
@@ -321,7 +416,7 @@
         },
         "postID": {
           "name": "postID",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": false,
           "notNull": true
         },
@@ -378,10 +473,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "title": {
           "name": "title",
@@ -404,6 +498,12 @@
         "topicTag": {
           "name": "topicTag",
           "type": "topicTag",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar(500)",
           "primaryKey": false,
           "notNull": true
         },
@@ -472,6 +572,13 @@
           "columns": [
             "id"
           ]
+        },
+        "question_slug_unique": {
+          "name": "question_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
         }
       }
     },
@@ -481,10 +588,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "body": {
           "name": "body",
@@ -515,7 +621,7 @@
         },
         "questionID": {
           "name": "questionID",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": false,
           "notNull": true
         },
@@ -572,10 +678,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "body": {
           "name": "body",
@@ -606,7 +711,7 @@
         },
         "questionPostID": {
           "name": "questionPostID",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": false,
           "notNull": true
         },
@@ -663,10 +768,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "input": {
           "name": "input",
@@ -688,7 +792,7 @@
         },
         "questionID": {
           "name": "questionID",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": false,
           "notNull": true
         }
@@ -716,6 +820,76 @@
           "nullsNotDistinct": false,
           "columns": [
             "id"
+          ]
+        }
+      }
+    },
+    "topic": {
+      "name": "topic",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "href": {
+          "name": "href",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "topic_id_unique": {
+          "name": "topic_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        },
+        "topic_title_unique": {
+          "name": "topic_title_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "title"
+          ]
+        },
+        "topic_href_unique": {
+          "name": "topic_href_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "href"
           ]
         }
       }
@@ -830,10 +1004,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "emailNotification": {
           "name": "emailNotification",
@@ -924,21 +1097,73 @@
     "topicTag": {
       "name": "topicTag",
       "values": {
-        "linked_lists": "linked_lists",
-        "arrays": "arrays",
-        "binary_search": "binary_search",
-        "divide_and_conquer": "divide_and_conquer",
-        "stacks": "stacks",
-        "queues": "queues",
-        "trees": "trees",
-        "hash_tables": "hash_tables",
-        "graphs": "graphs",
-        "recursion": "recursion",
-        "recursive_binary_search_trees": "recursive_binary_search_trees",
+        "all-topics": "all-topics",
+        "other": "other",
+        "array": "array",
+        "math": "math",
+        "string": "string",
+        "hash-table": "hash-table",
+        "dynamic-programming": "dynamic-programming",
         "sorting": "sorting",
-        "tree_traversal": "tree_traversal",
-        "dynamic_programming": "dynamic_programming",
-        "other": "other"
+        "greedy": "greedy",
+        "depth-first-search": "depth-first-search",
+        "database": "database",
+        "binary-search": "binary-search",
+        "tree": "tree",
+        "matrix": "matrix",
+        "bit-manipulation": "bit-manipulation",
+        "two-pointers": "two-pointers",
+        "binary-tree": "binary-tree",
+        "heap-(priority-queue)": "heap-(priority-queue)",
+        "prefix-sum": "prefix-sum",
+        "stack": "stack",
+        "simulation": "simulation",
+        "graph": "graph",
+        "design": "design",
+        "counting": "counting",
+        "sliding-window": "sliding-window",
+        "backtracking": "backtracking",
+        "union-find": "union-find",
+        "enumeration": "enumeration",
+        "linked-list": "linked-list",
+        "ordered-set": "ordered-set",
+        "monotonic-stack": "monotonic-stack",
+        "trie": "trie",
+        "number-theory": "number-theory",
+        "divide-and-conquer": "divide-and-conquer",
+        "recursion": "recursion",
+        "bitmask": "bitmask",
+        "queue": "queue",
+        "binary-search-tree": "binary-search-tree",
+        "topological-sort": "topological-sort",
+        "string-matching": "string-matching",
+        "combinatorics": "combinatorics",
+        "rolling-hash": "rolling-hash",
+        "shortest-path": "shortest-path",
+        "game-theory": "game-theory",
+        "interactive": "interactive",
+        "data-stream": "data-stream",
+        "brainteaser": "brainteaser",
+        "monotonic-queue": "monotonic-queue",
+        "randomized": "randomized",
+        "merge-sort": "merge-sort",
+        "iterator": "iterator",
+        "concurrency": "concurrency",
+        "doublly-linked-list": "doublly-linked-list",
+        "probability-and-statistics": "probability-and-statistics",
+        "quickselect": "quickselect",
+        "bucket-sort": "bucket-sort",
+        "suffix-array": "suffix-array",
+        "minimum-spanning-tree": "minimum-spanning-tree",
+        "counting-sort": "counting-sort",
+        "shell": "shell",
+        "line-sweep": "line-sweep",
+        "reservoir-sampling": "reservoir-sampling",
+        "stronly-connected-component": "stronly-connected-component",
+        "eulerian-circuit": "eulerian-circuit",
+        "radix-sort": "radix-sort",
+        "rejection-sampling": "rejection-sampling",
+        "biconnected-component": "biconnected-component"
       }
     }
   },

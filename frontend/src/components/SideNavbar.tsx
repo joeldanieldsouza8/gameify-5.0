@@ -26,7 +26,7 @@ const navLinks = [
   {
     name: "Dashboard",
     icon: AiOutlineAppstore,
-    href: "/",
+    href: "/dashboard",
   },
   {
     name: "Leaderboard",

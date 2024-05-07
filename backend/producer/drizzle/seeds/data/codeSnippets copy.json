@@ -1,0 +1,100 @@
+[
+  {
+    "snippets": {
+      "javascript": "
+          /**
+           * @param {number[]} nums
+           * @param {number} target
+           * @return {number[]}
+           */
+          var twoSum = function(nums, target) {
+              
+          };
+        ",
+      "typescript": "
+          function twoSum(nums: number[], target: number): number[] {
+              
+          };
+        ",
+      "python3": "
+          class Solution:
+              def twoSum(self, nums: List[int], target: int) -> List[int]:
+                  
+          ",
+      "java": "
+          class Solution {
+              public int[] twoSum(int[] nums, int target) {
+                  
+              }
+          }
+        ",
+    },
+
+    "questionID": questionsData[0].id,
+  },
+  {
+    "snippets": {
+      "java": "
+          class Solution {
+              public int maxArea(int[] height) {
+                  
+              }
+          }
+        ",
+      "python3": "
+          class Solution:
+              def maxArea(self, height: List[int]) -> int:
+                  
+          ",
+      "javascript": "
+          /**
+           * @param {number[]} height
+           * @return {number}
+           */
+          var maxArea = function(height) {
+              
+          };
+        ",
+      "typescript": "
+          function maxArea(height: number[]): number {
+              
+          };
+        ",
+    },
+
+    "questionID": questionsData[1].id,
+  },
+  {
+    "snippets": {
+      "typescript": "
+          function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
+              
+          };
+        ",
+      "python3": "
+          class Solution:
+              def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+                  
+          ",
+      "java": "
+          class Solution {
+              public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+                  
+              }
+          }
+        ",
+      "javascript": "
+          /**
+           * @param {number[]} nums1
+           * @param {number[]} nums2
+           * @return {number}
+           */
+          var findMedianSortedArrays = function(nums1, nums2) {
+              
+          };
+        ",
+    },
+
+    "questionID": questionsData[2].id,
+  }
+]

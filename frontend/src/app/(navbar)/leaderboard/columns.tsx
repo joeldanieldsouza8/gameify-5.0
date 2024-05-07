@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -27,28 +27,28 @@ export type User = {
 
 export const columns: ColumnDef<User>[] = [
   // New column for row selection
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   // {
   //   accessorKey: "positions",
   //   header: ({ column }) => {
@@ -63,6 +63,7 @@ export const columns: ColumnDef<User>[] = [
   //     );
   //   },
   // },
+
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -77,6 +78,7 @@ export const columns: ColumnDef<User>[] = [
       );
     },
   },
+
   // {
   //   accessorKey: "total_questions_answered",
   //   header: ({ column }) => {
@@ -91,14 +93,17 @@ export const columns: ColumnDef<User>[] = [
   //     );
   //   },
   // },
+
   {
     accessorKey: "xp_points",
     header: "XP Points",
   },
+
   {
     accessorKey: "badge",
     header: "Badge",
   },
+
   {
     id: "actions",
     cell: ({ row }) => {
@@ -114,14 +119,16 @@ export const columns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+            <DropdownMenuSeparator />
+
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(user.id)}
             >
               Copy user ID
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+
+            <DropdownMenuItem>View user profile</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

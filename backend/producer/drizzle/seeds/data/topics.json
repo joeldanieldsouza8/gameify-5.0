@@ -1,0 +1,57 @@
+[
+  {
+    "title": "All Topics",
+    "description": "Explore all Data Structures and Algorithms topics.",
+    "href": "/topics/all"
+  },
+  {
+    "title": "Arrays",
+    "description": "Learn about array data structures, operations, and common problems.",
+    "href": "/topics/arrays"
+  },
+  {
+    "title": "Linked Lists",
+    "description": "Understand single, double, and circular linked lists and their operations.",
+    "href": "/topics/linked-lists"
+  },
+  {
+    "title": "Stacks",
+    "description": "Explore how stacks work and their applications in algorithmic problems.",
+    "href": "/topics/stacks"
+  },
+  {
+    "title": "Queues",
+    "description": "Learn about queues, circular queues, and priority queues.",
+    "href": "/topics/queues"
+  },
+  {
+    "title": "Hash Tables",
+    "description": "Dive into hashing mechanisms, collision resolution strategies, and use cases.",
+    "href": "/topics/hash-tables"
+  },
+  {
+    "title": "Trees",
+    "description": "Study binary trees, binary search trees, AVL trees, and more.",
+    "href": "/topics/trees"
+  },
+  {
+    "title": "Graphs",
+    "description": "Understand graph representations, traversal algorithms, and shortest path problems.",
+    "href": "/topics/graphs"
+  },
+  {
+    "title": "Sorting Algorithms",
+    "description": "Learn different sorting algorithms and their complexities.",
+    "href": "/topics/sorting"
+  },
+  {
+    "title": "Searching Algorithms",
+    "description": "Study linear search, binary search, and more advanced searching techniques.",
+    "href": "/topics/searching"
+  },
+  {
+    "title": "Dynamic Programming",
+    "description": "Explore dynamic programming concepts, techniques, and problem solving.",
+    "href": "/topics/dynamic-programming"
+  }
+]

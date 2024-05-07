@@ -1,0 +1,19 @@
+[
+  {
+    "bulletPoints": "2 <= nums.length <= 10^4\n-10^9 <= nums[i] <= 10^9\n-10^9 <= target <= 10^9",
+
+    "questionID": 1
+  },
+
+  {
+    "bulletPoints": "n == height.length\n2 <= n <= 10^5\n0 <= height[i] <= 10^4",
+
+    "questionID": 2
+  },
+
+  {
+    "bulletPoints": "nums1.length == m\nnums2.length == n\n0 <= m <= 1000\n0 <= n <= 1000\n1 <= m + n <= 2000\n-10^6 <= nums1[i], nums2[i] <= 10^6",
+
+    "questionID": 3
+  }
+]

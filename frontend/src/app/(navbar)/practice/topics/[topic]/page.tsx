@@ -3,6 +3,12 @@ import H1 from "@/components/H1";
 import { Search } from "@/components/Search";
 import { columns } from "./columns";
 import { DataTable } from "@/app/(navbar)/practice/topics/[topic]/data-table";
+import { convertToTitleCase, convertToSlug } from "../../../../../lib/utils";
+import {
+  fetchAllQuestions,
+  fetchQuestionsByTopic,
+} from "@/actions/question.actions";
+import { QuestionType } from "@/types/types";
 
 type TopicPageProps = {
   params: {
@@ -12,40 +18,49 @@ type TopicPageProps = {
 
 const difficultyLevels = ["Easy", "Medium", "Hard"];
 
-// Sample data array
-const data = [
-  {
-    id: "1",
-    question_name: "Reverse a linked list in-place",
-    topic_tag: "Linked List",
-    difficulty_tag: "Easy",
-    slug: "linked-list"
-  },
-  {
-    id: "2",
-    question_name: "Find the kth smallest element in a BST",
-    topic_tag: "Binary Search Tree",
-    difficulty_tag: "Medium",
-    slug: "binary-search-tree"
-  },
-  {
-    id: "3",
-    question_name: "Implement a stack using two queues",
-    topic_tag: "Stacks",
-    difficulty_tag: "Hard",
-    slug: "stacks"
-  },
-  // Add more sample questions as needed
-];
-
-export default function TopicPage({ params }: TopicPageProps) {
+export default async function TopicPage({ params }: TopicPageProps) {
   const { topic } = params;
+  console.log("Topic:", topic); // debug
 
-  // call endpoint to get data
+  let questions: QuestionType[] = [];
+
+  // Guard clause to prevent fetching data when the topic is not valid
+  if (!topic) {
+    return (
+      <div>
+        <H1>Invalid topic</H1>
+      </div>
+    );
+  } else if (topic === "all") {
+    questions = await fetchAllQuestions();
+    console.log("All Questions Data:", questions); // debug
+  } else {
+    questions = await fetchQuestionsByTopic(topic);
+    console.log("Questions Data:", questions); // debug
+  }
+
+  // Guard clause to prevent rendering the page when there are no questions
+  if (!questions || questions.length === 0) {
+    return (
+      <div>
+        <H1>No questions found</H1>
+      </div>
+    );
+  }
+
+  // Transform the data to match the DataTable component's expected structure
+  const transformedQuestions = questions.map((question) => ({
+    id: question.id,
+    title: question.title,
+    topicTag: convertToTitleCase(question.topicTag) || "N/A",
+    difficulty: question.difficulty,
+    slug: convertToSlug(question.topicTag),
+  }));
+  console.log("Transformed Questions Data:", transformedQuestions); // debug
 
   return (
     <div className="flex flex-col gap-6">
-      <H1>{topic}</H1>
+      <H1>{convertToTitleCase(topic)}</H1>
 
       <div className="flex flex-wrap gap-4 items-center w-full justify-between">
         <Search />
@@ -53,7 +68,7 @@ export default function TopicPage({ params }: TopicPageProps) {
         <DifficultyTagsList difficultyLevels={difficultyLevels} />
       </div>
 
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={transformedQuestions} />
     </div>
   );
 }

@@ -3,14 +3,18 @@
 
 import { eq } from "drizzle-orm";
 import { db } from "../../drizzle/db";
-import { user } from "../../drizzle/schema/models/user";
-import { UserType, NewUserType } from "../../drizzle/schema/models/user";
+import { userTable } from "../../drizzle/schema/models/user.model";
+import {
+  UserTableType,
+  NewUserTableType,
+} from "../../drizzle/schema/models/user.model";
 
 import redisClient from "../config/redisClient";
 import {
   addToRedisSortedSet,
   addToRedisStream,
-  getFromRedisSortedSet,
+  getFromRedisSortedSetAscending,
+  getFromRedisSortedSetDescending,
   getFromRedisStream,
   getFromRedisStreamById,
 } from "../utils/redisUtils";
@@ -20,6 +24,7 @@ import {
   REDIS_USER_STREAM_KEY,
 } from "../lib/constants";
 
+// GET all users 
 async function getUsers() {
   console.log("user.service.ts getUsers() called"); // debug
   try {
@@ -42,7 +47,7 @@ async function getUsers() {
 
     console.log("CACHE MISS: Fetching all users from database"); // debug
 
-    const fetchedUsers: UserType[] = await db.query.user.findMany();
+    const fetchedUsers: UserTableType[] = await db.query.userTable.findMany();
 
     // console.log("Fetched users:", fetchedUsers); // debug
     console.log(
@@ -74,13 +79,14 @@ async function getUsers() {
   }
 }
 
+// GET user by ID
 async function getUserById(userID: string) {
   try {
     console.log(`Fetching user with ID: ${userID}`); // debug
 
     // Fetch the user from the database
-    const fetchedUser = await db.query.user.findFirst({
-      where: eq(user.clerkID, userID),
+    const fetchedUser = await db.query.userTable.findFirst({
+      where: eq(userTable.clerkID, userID),
     });
     console.log("Fetched user:", fetchedUser); // debug
 
@@ -103,8 +109,8 @@ async function deleteUser(userID: string) {
 
     // Delete the user from the database
     const deletedUser = await db
-      .delete(user)
-      .where(eq(user.clerkID, userID))
+      .delete(userTable)
+      .where(eq(userTable.clerkID, userID))
       .execute();
 
     console.log("User deleted successfully:", deletedUser); // debug
@@ -121,16 +127,8 @@ async function deleteUser(userID: string) {
   }
 }
 
-// type NewUserType = {
-//   clerkID: string;
-//   username: string | null;
-//   email: string;
-//   firstName: string | null;
-//   lastName: string | null;
-// };
-
 // Clerk Webhook Handler
-async function createUser(userData: NewUserType) {
+async function createUser(userData: NewUserTableType) {
   console.log("createUser() called with data:", userData); // debug
 
   try {
@@ -143,11 +141,11 @@ async function createUser(userData: NewUserType) {
     // The onConflictDoUpdate() method will check if a row with the same clerkID already exists in the user table.
     // If a conflict is detected, it will update the existing row with the new values instead of inserting a new row.
     // This way, you can avoid creating duplicate users in your database when the user.created or user.updated events are received from Clerk.
-    const result: NewUserType[] = await db
-      .insert(user)
+    const result: NewUserTableType[] = await db
+      .insert(userTable)
       .values(userData)
       .onConflictDoUpdate({
-        target: user.clerkID, // The target option specifies the column(s) that should be used to detect conflicts. In this case, we're using the clerkID column.
+        target: userTable.clerkID, // The target option specifies the column(s) that should be used to detect conflicts. In this case, we're using the clerkID column.
         set: {
           // The set option specifies the columns that should be updated if a conflict is detected. In this case, we're updating the username, email, firstName, and lastName columns.
           username: userData.username,

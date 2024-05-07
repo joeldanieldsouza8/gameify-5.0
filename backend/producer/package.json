@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon --exec ts-node src/index.ts\"",
-    "migrations:introspect": "drizzle-kit introspect:pg --config=drizzle/drizzle.config.ts",
-    "migrations:generate": "drizzle-kit generate:pg --config=drizzle/drizzle.config.ts",
-    "migrations:drop": "drizzle-kit drop --config=drizzle/drizzle.config.ts",
+    "db:introspect": "drizzle-kit introspect:pg --config=drizzle/drizzle.config.ts",
+    "db:generate": "drizzle-kit generate:pg --config=drizzle/drizzle.config.ts",
+    "db:drop": "drizzle-kit drop --config=drizzle/drizzle.config.ts",
     "db:migrate": "ts-node -r dotenv/config drizzle/migrate.ts",
     "db:seed": "ts-node -r dotenv/config drizzle/seed.ts",
     "studio": "drizzle-kit studio --config=drizzle/drizzle.config.ts"
@@ -23,10 +23,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.10",
+    "drizzle-zod": "^0.5.1",
     "express": "^4.19.2",
     "ioredis": "^5.4.1",
     "pg": "^8.11.5",
-    "postgres": "^3.4.4"
+    "postgres": "^3.4.4",
+    "zod": "^3.23.6"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

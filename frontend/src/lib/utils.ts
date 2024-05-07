@@ -1,12 +1,19 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function convertToTitleCase(text: string | null | undefined) {
   return text?.replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+export function convertToSlug(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
 }
 
 // export function getCookie(name: string): string | undefined {
@@ -24,4 +31,3 @@ export function convertToTitleCase(text: string | null | undefined) {
 //   }
 //   return cookieValue;
 // }
-
